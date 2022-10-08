@@ -24,6 +24,9 @@ eBPF启动原子操作
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
 
+[BTF简介与入门实践](https://www.containiq.com/post/btf-bpf-type-format)
+
+
 ## 问题定位&解决(stack overflow)
 
 [tc 无法正确 redirect](https://stackoverflow.com/questions/63352978/why-dont-bpf-redirect-work-correctlyxdp)
@@ -33,4 +36,18 @@ eBPF启动原子操作
 [af_xdp need wakeup](https://stackoverflow.com/questions/60828204/af-xdp-how-does-xdp-use-need-wakeup-work-e-g-how-to-reduce-ksoftirqd-load)
 
 
+## Linux源码学习
 
+[Linux内核揭秘(Linunx inside汉化版)](https://github.com/MintCN/linux-insides-zh)
+
+[Linux性能调优和tracing工具使用思维导图(密码:linux)](https://www.processon.com/view/link/62ef5b4e0791292e9d378261#map)
+
+[Linux 中断机制学习资料(softirq,tasklet)](https://www.cnblogs.com/arnoldlu/p/8659972.html)
+
+[Linux workqueue CMWQ 介绍](https://www.jianshu.com/p/4f25d39fdff4)
+
+[Linux 内核代码中的双向链表list_head介绍](https://www.linuxidc.com/Linux/2011-10/44627.htm)
+
+[Linux 内核等待队列 Wait queue介绍](https://www.cnblogs.com/gctech/p/6872301.html)
+
+[Linux rcu机制介绍(链表操作常见)](https://zhuanlan.zhihu.com/p/113999842)
