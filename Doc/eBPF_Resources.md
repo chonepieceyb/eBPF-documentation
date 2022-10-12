@@ -20,8 +20,6 @@ eBPF启动原子操作
 
 ## 教程
 
-[使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
-
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
 
 [BTF简介与入门实践](https://www.containiq.com/post/btf-bpf-type-format)
@@ -52,6 +50,10 @@ eBPF启动原子操作
 [Linux 内核等待队列 Wait queue介绍](https://www.cnblogs.com/gctech/p/6872301.html)
 
 [Linux rcu机制介绍(链表操作常见)](https://zhuanlan.zhihu.com/p/113999842)
+
+## eBPF use case 
+[使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
+[MPTCP: Extending kernel functionality with eBPF and Netlink(使用eBPF的struct op来扩展MPTCP scheduler)](https://lpc.events/event/16/contributions/1354/)
 
 ## eBPF视频
 [LPC2022 eBPF & Networking](https://www.youtube.com/watch?v=andvNRUAAs0&t=5237s)
