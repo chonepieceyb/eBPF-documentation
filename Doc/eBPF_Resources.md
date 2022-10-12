@@ -52,3 +52,6 @@ eBPF启动原子操作
 [Linux 内核等待队列 Wait queue介绍](https://www.cnblogs.com/gctech/p/6872301.html)
 
 [Linux rcu机制介绍(链表操作常见)](https://zhuanlan.zhihu.com/p/113999842)
+
+## eBPF视频
+[LPC2022 eBPF & Networking](https://www.youtube.com/watch?v=andvNRUAAs0&t=5237s)
