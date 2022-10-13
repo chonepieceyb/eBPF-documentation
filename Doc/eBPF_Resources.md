@@ -18,6 +18,8 @@ eBPF启动原子操作
 
 [kernel5.13eBPF支持调用内核函数](https://lwn.net/Articles/856005/)
 
+[引入struct_ops的patch](https://lore.kernel.org/bpf/20191214004737.1652076-1-kafai@fb.com/)
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
