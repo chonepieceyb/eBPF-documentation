@@ -20,12 +20,15 @@ eBPF启动原子操作
 
 [引入struct_ops的patch](https://lore.kernel.org/bpf/20191214004737.1652076-1-kafai@fb.com/)
 
+[BTF kernel 文档](https://docs.kernel.org/bpf/btf.html)
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
 
 [BTF简介与入门实践](https://www.containiq.com/post/btf-bpf-type-format)
 
+[eBPF BTF kernel 文档的中文翻译](https://www.ebpf.top/post/kernel_btf/)
 
 ## 问题定位&解决(stack overflow)
 
