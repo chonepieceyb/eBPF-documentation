@@ -41,7 +41,8 @@ eBPF启动原子操作
 [af_xdp need wakeup](https://stackoverflow.com/questions/60828204/af-xdp-how-does-xdp-use-need-wakeup-work-e-g-how-to-reduce-ksoftirqd-load)
 
 
-## Linux源码学习
+## Linux源码相关
+
 [Linux 内核源码在线阅读网站(支持宏，函数，变量的搜索)](https://elixir.bootlin.com/linux/latest/source)
 
 [Linux 内核揭秘(Linunx inside汉化版)](https://github.com/MintCN/linux-insides-zh)
@@ -57,6 +58,8 @@ eBPF启动原子操作
 [Linux 内核等待队列 Wait queue介绍](https://www.cnblogs.com/gctech/p/6872301.html)
 
 [Linux rcu机制介绍(链表操作常见)](https://zhuanlan.zhihu.com/p/113999842)
+
+[Linux kernel链表，字符串常见API](https://www.cnblogs.com/lifexy/p/10175143.html)
 
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
