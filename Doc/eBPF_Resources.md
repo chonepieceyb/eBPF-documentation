@@ -30,6 +30,8 @@ eBPF启动原子操作
 
 [eBPF BTF kernel 文档的中文翻译](https://www.ebpf.top/post/kernel_btf/)
 
+[BTF vmlinux功能概述](https://www.ebpf.top/post/intro_vmlinux_h/)
+
 ## 问题定位&解决(stack overflow)
 
 [tc 无法正确 redirect](https://stackoverflow.com/questions/63352978/why-dont-bpf-redirect-work-correctlyxdp)
