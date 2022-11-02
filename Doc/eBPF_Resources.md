@@ -61,6 +61,8 @@ eBPF启动原子操作
 
 [Linux kernel链表，字符串常见API](https://www.cnblogs.com/lifexy/p/10175143.html)
 
+[Linux per cpu变量的原理及其实现(内含重新编译某个.o文件的方法)](https://zhuanlan.zhihu.com/p/340985476)
+
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
 
