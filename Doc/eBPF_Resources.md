@@ -65,6 +65,8 @@ eBPF启动原子操作
 
 [Linux per cpu变量的原理及其实现(内含重新编译某个.o文件的方法)](https://zhuanlan.zhihu.com/p/340985476)
 
+[linux 内核内存回收机制](https://zhuanlan.zhihu.com/p/72998605)
+
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
 
