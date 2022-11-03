@@ -43,6 +43,8 @@ eBPF启动原子操作
 
 ## Linux源码相关
 
+[Linux 内核API(看/写代码的时候，跨函数查阅)](https://www.kernel.org/doc/html/v5.19/core-api/index.html)
+
 [Linux 内核源码在线阅读网站(支持宏，函数，变量的搜索)](https://elixir.bootlin.com/linux/latest/source)
 
 [Linux 内核揭秘(Linunx inside汉化版)](https://github.com/MintCN/linux-insides-zh)
