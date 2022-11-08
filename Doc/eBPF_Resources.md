@@ -67,6 +67,8 @@ eBPF启动原子操作
 
 [linux 内核内存回收机制](https://zhuanlan.zhihu.com/p/72998605)
 
+[linux cache机制(文章比较老但是看完能有一个大致的理解](https://developer.aliyun.com/article/338201)
+
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
 
