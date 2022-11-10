@@ -16,7 +16,7 @@
 
 map_ops实现在 `./kernel/bpf/bpf_struct_ops.c`
 
-![image-20221109163807298](/Users/ybchonepiece/Library/Application Support/typora-user-images/image-20221109163807298.png)
+![image-20221109163807298](Map_Ops_BPF_MAP_TYPE_STRUCT_OP.assets/image-20221109163807298.png)
 
 ### bpf_struct_ops 
 
