@@ -2,6 +2,16 @@
 
 ## 数据结构
 
+### bpfptr_t 
+
+```c
+typedef sockptr_t bpfptr_t;
+```
+
+![image-20221109154550592](eBPF_map_kernel.assets/image-20221109154550592.png)
+
+用一个结构体来统一表示内核态指针和用户态指针。因为这些指针经常设计内核态和用户态的数据交换。
+
 ### bpf_map 
 
 `struct bpf_map` 是BPF MAP的核心数据结构，定义在 ./include/linux/bpf.h 中
@@ -53,11 +63,19 @@ classDiagram
 
 目前map的value好像允许存放 kernel function（module or ..) 的指针了？ 可以存放多个，也就是说很多 kernel模块可以通过 eBPF暴露出去。（很奇怪的一点事，struct_op 要求不存在 value_id, 那这个特性的作用是什么？） 这个成员变变量保存着 bpf_kptr 的描述信息。 
 
+**atomic64_t writecnt;** 
+
+写计数器
+
+在 `bpf_update_map` 中 ``err = bpf_map_new_fd(map, f_flags);` `
+
+**u32 btf_vmlinux_value_type_id;**
+
+通过btf_id找到对应的 内核数据结构`sturct bpf_struct_ops`(STRUCT_OP)。保存在 btf.ids section 里
+
 **struct owner** 
 
 这个数据结构应该是用来表示使用了这个map的prog的。(猜测)
-
-q
 
 ### bpf_map_ops 
 
@@ -67,9 +85,9 @@ q
 
 ## 代码逻辑
 
-### map_create
+### map_create 
 
-创建eBPF map 
+用户态通过eBPF系统调用 创建eBPF map 
 
 **函数参数** 
 
@@ -154,6 +172,58 @@ q
 
 -> `err = bpf_map_new_fd(map, f_flags);`  分配 fd 
 
+### map_update_elem 
+
+用户态通过 update 系统调用 更新 bpf map 
+
+系统调用参数
+
+![image-20221109153041179](eBPF_map_kernel.assets/image-20221109153041179.png)
+
+**调用逻辑** 
+
+-> `bpfptr_t ukey = make_bpfptr(attr->key, uattr.is_kernel);`  内核态指针和用户态指针不同。用 `struct bpfptr_t` 来统一表示。
+
+-> `bpfptr_t uvalue = make_bpfptr(attr->value, uattr.is_kernel);`
+
+-> `struct bpf_map *map; void *key, value; struct fd f`
+
+-> `f = fdget(ufd)` 通过 fd 获取 struct fd. 
+
+-> `map = __bpf_map_get(f);`  获取 ufd 对应的 bpf_map; 实际上是 
+
+​	--> `f.file->private_data;` 
+
+-> `bpf_map_write_active_inc(map);`   `map->writecnt` 原子增 1 
+
+-> `!(map_get_sys_perms(map, f) & FMODE_CAN_WRITE)) ? err` 检查写权限
+
+-> `(attr->flags & BPF_F_LOCK) && !map_value_has_spin_lock(map) ? err`  如果 update 的 flag 里有 `BPF_F_LOCK` 那么value里必须包含自旋锁，通过在 map_careate中解析得到的offset进行判断
+
+-> `	key = ___bpf_copy_key(ukey, map->key_size);`  分配内核空间， 将key从用户态拷贝到内核态
+
+​	--> `kvmemdup_bpfptr(ukey, key_size);` 
+
+​		---> `void *p = kvmalloc(len, GFP_USER | __GFP_NOWARN);` 
+
+​		---> `copy_from_bpfptr(p, src, len)` 
+
+-> `value_size = bpf_map_value_size(map);`  计算map的value_size。**特别注意的是，对于per cpu类型其size为 map->value_size * cpu_num** 这也验证了，用户态对 percpu的map类型调用 update ，返回的是所有 CPU的value组合而成的数组。**需要在用户态做进一步的聚合**
+
+​	--> for per cpu `return round_up(map->value_size, 8) * num_possible_cpus();` 
+
+​	--> for fd array (array of map,  prog array, hash of maps) ` return sizeof(u32);`
+
+​	--> 其它 `map->value_size;`
+
+-> `value = kvmalloc(value_size, GFP_USER | __GFP_NOWARN);`  分配内存
+
+-> `copy_from_bpfptr(value, uvalue, value_size) != 0` 将需要 update 的 value 从用户态拷贝到内核态
+
+-> `err = bpf_map_update_value(map, f, key, value, attr->flags);` 调用特定map的update函数。 （目前到这里都没有涉及并发控制) ,  writecnt 这个院子变量的用途也暂且不明。
+
+
+
 ## 编程技巧
 
 ### 缓存友好代码
@@ -165,3 +235,11 @@ q
 ![image-20221108112647370](eBPF_map_kernel.assets/image-20221108112647370.png)
 
 2. 一些写频率不一致的变量，拉开存储间隔，避免cache false sharing。(关于false sharing的文章见 doc里 linux cache)
+
+### kernel 内判断指针地址是否合法
+
+![image-20221109160126858](eBPF_map_kernel.assets/image-20221109160126858.png)
+
+这里主要使用 IS_ERR 宏。 该宏会判断地址是否超出特定的地址边界 
+
+![image-20221109160314579](eBPF_map_kernel.assets/image-20221109160314579.png)
