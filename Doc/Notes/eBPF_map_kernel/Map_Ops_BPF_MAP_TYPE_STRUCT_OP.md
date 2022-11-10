@@ -8,9 +8,9 @@
 
 保存所有的 bpf_struct_op， 按照BTF id 进行索引
 
-![image-20221110172442249](Map Ops of BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110172442249.png)
+![image-20221110172442249](Map_Ops_BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110172442249.png)
 
-![image-20221110172608309](Map Ops of BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110172608309.png)
+![image-20221110172608309](Map_Ops_BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110172608309.png)
 
 目前只实现了 congestion_ops
 
@@ -247,5 +247,5 @@ ps : 这里我感觉部分的check，和map_create里的check重复了
 
 ### 利用宏自动生成 struct 定义
 
-![image-20221110192516048](Map Ops of BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110192516048.png)
+![image-20221110192516048](Map_Ops_BPF_MAP_TYPE_STRUCT_OP.assets/image-20221110192516048.png)
 
