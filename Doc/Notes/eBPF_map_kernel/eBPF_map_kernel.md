@@ -113,7 +113,7 @@ classDiagram
 
 ​	--> `if (attr->map_ifindex) ops = &bpf_map_offload_ops`  **判断是否需要将map卸载到硬件上**
 
-​	--> `map = ops->map_alloc(attr)` 分配并初始化map。具体的初始化方法和具体的map相关
+​	--> `map = ops->map_alloc(attr)` 分配并初始化map。具体的初始化方法和具体的map相关 **重要hook点**
 
 ​	-->`map->ops = ops; map->map_type = type`  **挂载ops**
 

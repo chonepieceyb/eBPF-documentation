@@ -8,6 +8,12 @@
 
 ![image-20221102213705213](eBPF_prog_kernel.assets/image-20221102213705213.png)
 
+**expected_attach_type** 
+
+不同的prog类型含义不同，比如对于socket_op来说，attach_type代表不同的 socket时间
+
+对于struct_op类型来说，attach_type代表被attach的内核模块(struct)下对应的函数(btf_member)的id。
+
 ### bpf_prog_aux 
 
 **jited_linfo 和 linfo** 
@@ -15,6 +21,14 @@
 jited_linfo从注释来看， JIT可以理解成把 BPF指令逐一映射为机器指令
 
 ![image-20221103163709300](eBPF_prog_kernel.assets/image-20221103163709300.png)
+
+**attach_btf_id** 
+
+prog attach点代表的btf。
+
+以struct_op为例，这里的btf点对应内核的数据结构 `prog->aux->attach_btf_id != st_ops->type_id`
+
+
 
 ## 主要函数
 
@@ -72,7 +86,7 @@ jited_linfo从注释来看， JIT可以理解成把 BPF指令逐一映射为机�
 
 ​		---> `fp->bpf_func = __bpf_prog_ret0_warn;`  如果JIT则使用默认的函数，该函数直接返回0什么都不干, 并打印警报表示JIT没有生效 。因为如果JIT成功， bpf_func 会被 bpf_int_jit_compile 函数替换
 
- 	--> for `!bpf_prog_is_dev_bound(fp->aux)`
+​	--> `for !bpf_prog_is_dev_bound(fp->aux)`
 
 ​	    --->  `*err = bpf_prog_alloc_jited_linfo(fp);` 分配空间
 
