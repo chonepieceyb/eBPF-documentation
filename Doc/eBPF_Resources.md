@@ -31,6 +31,7 @@ eBPF启动原子操作
 [eBPF BTF kernel 文档的中文翻译](https://www.ebpf.top/post/kernel_btf/)
 
 [BTF vmlinux功能概述](https://www.ebpf.top/post/intro_vmlinux_h/)
+[eBPF ring buffer用法](https://www.ebpf.top/post/bpf_ring_buffer/)
 
 ## 问题定位&解决(stack overflow)
 
@@ -39,6 +40,8 @@ eBPF启动原子操作
 [af_xdp](https://stackoverflow.com/questions/72329171/bpf-map-type-xskmap-element-not-set-even-though-xsk-socket-create-succeeds)
 
 [af_xdp need wakeup](https://stackoverflow.com/questions/60828204/af-xdp-how-does-xdp-use-need-wakeup-work-e-g-how-to-reduce-ksoftirqd-load)
+
+[Userspace程序的bpf_ktime_get_ns](https://stackoverflow.com/a/60976989)
 
 
 ## Linux源码相关
