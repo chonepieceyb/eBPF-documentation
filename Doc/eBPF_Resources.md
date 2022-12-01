@@ -79,6 +79,8 @@ eBPF启动原子操作
 
 [Linux spin_lock和raw_spin_lock](https://blog.csdn.net/DroidPhone/article/details/7395983)
 
+[Linux kernel run document](https://docs.kernel.org/RCU/whatisRCU.html#rcu-overview)
+
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
 
