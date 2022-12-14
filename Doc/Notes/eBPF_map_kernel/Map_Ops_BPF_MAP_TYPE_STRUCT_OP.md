@@ -541,7 +541,48 @@ static int __init bpf_tcp_ca_kfunc_init(void)
 }
 ```
 
+## How to add a new struct_op hook ? 
 
+1. 设计 自己需要暴露的 模块接口 `struct my_module`
+
+2. 实现验证器操作 `struct verifier_ops`
+
+   * `get_fun_proto` 可以使用的帮助函数
+   * `is_valid_access` 访问 ctx 的验证操作
+   * `btf_struct_access` 访问具体的 指针的验证操作 
+
+3. 实现 `struct bpf_struct_ops`
+
+   * 实现 `init`方法
+   * 实现 `reg`方法
+   * 实现`unreg`方法
+   * 实现`check_member`方法
+   * 实现`init_member`方法
+   * **设置name的值为 "$my_module"** (填上my_module的名字)
+   * 实现 verifier_ops 
+
+   
+
+4. 设置允许调用的kern function 
+
+   eg : `register_btf_kfunc_id_set(BPF_PROG_TYPE_STRUCT_OPS, &bpf_tcp_ca_kfunc_set);` 
+
+   ```c
+   BTF_SET_START(bpf_tcp_ca_check_kfunc_ids)
+   BTF_ID(func, tcp_reno_ssthresh)
+   BTF_ID(func, tcp_reno_cong_avoid)
+   BTF_ID(func, tcp_reno_undo_cwnd)
+   BTF_ID(func, tcp_slow_start)
+   BTF_ID(func, tcp_cong_avoid_ai)
+   BTF_SET_END(bpf_tcp_ca_check_kfunc_ids)
+   
+   static const struct btf_kfunc_id_set bpf_tcp_ca_kfunc_set = {
+   	.owner     = THIS_MODULE,
+   	.check_set = &bpf_tcp_ca_check_kfunc_ids,
+   };
+   ```
+
+   
 
 ## 编程技巧
 
