@@ -220,7 +220,13 @@ classDiagram
 
 -> `copy_from_bpfptr(value, uvalue, value_size) != 0` 将需要 update 的 value 从用户态拷贝到内核态
 
+->`rcu_read_lock();` 
+
 -> `err = bpf_map_update_value(map, f, key, value, attr->flags);` 调用特定map的update函数。 （目前到这里都没有涉及并发控制) ,  writecnt 这个院子变量的用途也暂且不明。
+
+-> `rcu_read_unlock();` 
+
+
 
 
 
