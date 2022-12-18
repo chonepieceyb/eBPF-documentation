@@ -81,6 +81,8 @@ eBPF启动原子操作
 
 [Linux kernel run document](https://docs.kernel.org/RCU/whatisRCU.html#rcu-overview)
 
+[Linux 内核变更记录总结](https://kernelnewbies.org/LinuxVersions)
+
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
 
