@@ -34,6 +34,8 @@ eBPF启动原子操作
 
 [eBPF ring buffer用法](https://www.ebpf.top/post/bpf_ring_buffer/)
 
+[eBPF TCP相关程序类型教程sock_op, struct_op](https://arthurchiao.art/blog/bpf-advanced-notes-5-zh/)
+
 ## 问题定位&解决(stack overflow)
 
 [tc 无法正确 redirect](https://stackoverflow.com/questions/63352978/why-dont-bpf-redirect-work-correctlyxdp)
