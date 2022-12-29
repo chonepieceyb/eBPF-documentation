@@ -24,6 +24,8 @@ eBPF启动原子操作
 
 [BPF Iterator 文档](https://docs.kernel.org/bpf/bpf_iterators.html)
 
+[BPF kptr支持](https://lwn.net/Articles/900749/)
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
