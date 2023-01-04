@@ -81,7 +81,167 @@ classDiagram
 
 `struct bpf_map_ops` 是一组抽象的接口，抽象了不同MAP所需要的共有的方法。对于BPF_MAP来说这是很重要的hook点。`bpf_map_ops`里的方法包括，`bpf_map_update, bpf_map_delete` 等。
 
+**map_meta_equal** 
 
+用于map_of_map类型的inner map(hash of map ,array of array) 必须实现的方法， 比较插入的map类型是否匹配，调用路径
+
+-> `bpf_map_update_elem`
+
+--> `map_fd_get_ptr(bpf_map_fd_get_ptr)`
+
+---> `map->ops->map_meta_equal`
+
+**map_alloc_check**
+
+分配内存前检查map参数
+
+->`map_create`
+
+-->`find_and_alloc_map`
+
+--->`err = map->ops->map_alloc_check` 
+
+**map_alloc**
+
+分配map内存
+
+->`map_create`
+
+-->`find_and_alloc_map`
+
+--->`map = ops->map_alloc`
+
+**map_free** 
+
+释放map的内存
+
+->`bpf_put`
+
+-->`bpf_map_free_deferred` (workqueue)
+
+--->`map->ops->map_free` 
+
+**map_get_next_key**
+
+用于遍历map 
+
+->`map_get_next_key`
+
+-->`map->ops->map_get_next_key`
+
+**map_release_uref** 
+
+一般在该函数里处理还未触发的定时器 (release user reference)
+
+->`bpf_map_put_with_uref` 
+
+​	-->`bpf_map_put_uref`
+
+​		--> `map->ops->map_release_unref(map);`
+
+**map_lookup_elem** 
+
+具体map lookup的实现
+
+**map_update_elem** 
+
+具体map的update方法的实现
+
+**map_delete_elem** 
+
+具体map的delete方法的实现
+
+**map_gen_lookup** 
+
+**用一系列eBPF指令代替系统调用(例如array可以简单获取地址), 在一定程度上应该会更高效**
+
+-> `bpf_check` 
+
+--> `do_misc_fixups`
+
+---> `map->ops->map_gen_lookup`
+
+**map_direct_value_addr** 
+
+对于只读的map(如何赋初值) 例如只有一个元素且只读的ARRAY(当成全局变量使用), 通过该函数优化直接返回地址，在验证阶段替换指令
+
+-> `bpf_check` 
+
+​	--> `check_mem_access` 
+
+​		---> `bpf_map_direct_read` 
+
+​			---->`map->ops->map_direct_value_addr` 
+
+**map_direct_value_meta** 
+
+**??从调用路径上来看，该函数是当 prog dump到用户态时调用获取 map fd, 以array为例将地址转化为 off**
+
+->` bpf_obj_get_info_by_fd`
+
+​	--> `bpf_prog_get_info_by_fd` 
+
+​		--->`bpf_insn_prepare_dump` 
+
+​			----> `map = bpf_map_from_imm(prog, imm, &off, &type);` 
+
+​				----->`map->ops->map_direct_value_meta(map, addr, off)` 
+
+**map_mmap** 
+
+**对BPF map使用mmap需要调用的函数 ??需要熟悉mmap的原理和用法(需要配置 BPF_F_MMAPABLE**
+
+-> `bpf_map_mmap` bpf_map_fops
+
+--> `map->ops->map__mmap` 
+
+**map_seq_show_elem** 
+
+猜测和打印相关(seq_file, proc)
+
+-> `map_seq_show` 
+
+​	--> `map->ops->map_seq_show_elem` 
+
+**map_check_btf** 
+
+创建map之前检查map key和value的btf
+
+->`map_create`
+
+--> `map_check_btf`
+
+**map_lookup_batch** 
+
+map批量查找的具体实现
+
+**map_update_batch** 
+
+map批量更新的具体实现	
+
+**map_set_for_each_callback_args** 
+
+对于 `bpf_map_for_each_elem` 帮助函数 设置回调函数的参数
+
+-> `check_helper_call` 
+
+​	--> `set_map_elem_callback_state` 
+
+​		---> `__check_func_call(.., map_set_for_each_callback_args) ` 
+
+**bpf_for_each_array_elem** 
+
+map遍历的具体实现
+
+**map_btf_id** 
+
+该map的btf_id
+
+.map_btf_id = &array_map_btf_ids[0],
+
+**iter_seq_info** 
+
+**??bpf迭代器相关，之后再看，需要阅读kernel seq的文档**
 
 ## 代码逻辑
 
@@ -202,7 +362,7 @@ classDiagram
 
 -> `	key = ___bpf_copy_key(ukey, map->key_size);`  分配内核空间， 将key从用户态拷贝到内核态
 
-​	--> `kvmemdup_bpfptr(ukey, key_size);` 
+​	--> `kvmemdup_bpfptr(ukey, key_size)f;` 
 
 ​		---> `void *p = kvmalloc(len, GFP_USER | __GFP_NOWARN);` 
 
@@ -226,9 +386,19 @@ classDiagram
 
 -> `rcu_read_unlock();` 
 
+## 如何实现一个新的BPF_MAP ? 
 
-
-
+1. 实现 bpf_map_ops
+   * map_alloc_check
+   * map_alloc
+   * map_free
+   * map_update
+   * map_lookup
+   * (map_delete)
+   * map_check_btf
+   * map_btf_id 
+   * map_seq_show_elem? 
+2. 修改bpf工具，例如libbpf和bpftool
 
 ## 编程技巧
 
