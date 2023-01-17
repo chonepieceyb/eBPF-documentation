@@ -89,7 +89,11 @@ eBPF启动原子操作
 
 [Linux 内核变更记录总结](https://kernelnewbies.org/LinuxVersions)
 
+## Linux kernel documentation 
+
 [Linux 内存屏障](https://www.kernel.org/doc/Documentation/memory-barriers.txt)
+
+[Linux atomic_t](https://www.kernel.org/doc/Documentation/atomic_t.txt) 
 
 ## eBPF use case 
 [使用EBPF来进行TCP拥塞控制](https://www.ebpf.top/post/ebpf_struct_ops/)
