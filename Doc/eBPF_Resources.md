@@ -61,6 +61,8 @@ eBPF启动原子操作
 
 [Linux 性能调优和tracing工具使用思维导图(密码:linux)](https://www.processon.com/view/link/62ef5b4e0791292e9d378261#map)
 
+[Linux Tracing systems & how they fit together](https://jvns.ca/blog/2017/07/05/linux-tracing-systems/)
+
 [Linux 中断机制学习资料(softirq,tasklet)](https://www.cnblogs.com/arnoldlu/p/8659972.html)
 
 [Linux workqueue CMWQ 介绍](https://www.jianshu.com/p/4f25d39fdff4)
