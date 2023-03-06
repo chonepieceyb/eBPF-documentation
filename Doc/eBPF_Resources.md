@@ -1,5 +1,8 @@
 # BPF Documents
 
+## 内核邮件讨论
+[eBPF程序执行过程关闭抢占的假设在高版本内核是错误的，一个per-cpu MAP尽量只被一个eBPF程序使用](https://lore.kernel.org/bpf/CAMy7=ZWPc279vnKK6L1fssp5h7cb6cqS9_EuMNbfVBg_ixmTrQ@mail.gmail.com/T/)
+
 ## 内核社区文档
 
 [国内的Linux相关内容很不错的网站](http://www.wowotech.net/sort/irq_subsystem)
