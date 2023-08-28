@@ -35,6 +35,8 @@ eBPF启动原子操作
 
 [SECure COMPuting with filters](https://www.kernel.org/doc/Documentation/prctl/seccomp_filter.txt)
 
+[Introduce the BPF dispatcher](https://lore.kernel.org/bpf/20191211123017.13212-1-bjorn.topel@gmail.com/)
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
