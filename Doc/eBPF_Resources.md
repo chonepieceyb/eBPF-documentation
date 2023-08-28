@@ -33,6 +33,8 @@ eBPF启动原子操作
 
 [BPF kptr支持](https://lwn.net/Articles/900749/)
 
+[SECure COMPuting with filters](https://www.kernel.org/doc/Documentation/prctl/seccomp_filter.txt)
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
