@@ -21,6 +21,8 @@ eBPF启动原子操作
 
 ![image-20220901115500782](./eBPF_Resources.assets/image-20220901115500782.png)
 
+[Program Types and ELF Sections](https://docs.kernel.org/bpf/libbpf/program_types.html#program-types-and-elf)
+
 [kernel5.6eBPF支持struct_ops和拥塞控制](https://lwn.net/Articles/811631/)
 
 [kernel5.13eBPF支持调用内核函数](https://lwn.net/Articles/856005/)
