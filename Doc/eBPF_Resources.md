@@ -41,6 +41,8 @@ eBPF启动原子操作
 
 [Introduce the BPF dispatcher](https://lore.kernel.org/bpf/20191211123017.13212-1-bjorn.topel@gmail.com/)
 
+[BPF skeleton介绍](https://manpages.ubuntu.com/manpages/focal/man8/bpftool-gen.8.html) 
+
 ## 教程
 
 [eBPF程序类型](https://arthurchiao.art/blog/bpf-advanced-notes-1-zh/)
