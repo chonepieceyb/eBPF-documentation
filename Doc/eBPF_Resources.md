@@ -17,6 +17,8 @@
 
 [eBPF指令集](https://docs.kernel.org/bpf/instruction-set.html)
 
+[bpf: Introduce bpf sk local storage(每一个socket单独开一块存储给BPF程序,不用再使用HASH MAP)](https://lore.kernel.org/bpf/20190426233939.1330422-1-kafai@fb.com/)
+
 eBPF启动原子操作 
 
 ![image-20220901115500782](./eBPF_Resources.assets/image-20220901115500782.png)
